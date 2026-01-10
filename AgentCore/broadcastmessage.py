@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from autogen_core import AgentId, MessageContext, RoutedAgent, message_handler, SingleThreadedAgentRuntime, type_subscription,TopicId
+from autogen_core import TypeSubscription
 import asyncio
 
 @dataclass
@@ -35,10 +36,13 @@ async def main() -> None:
 
     broadcastagenttype = "broadcastagentagent"
     await BroadCastAgent.register(agentruntime, broadcastagenttype, lambda : BroadCastAgent("BroadCastAgent"))
+    await agentruntime.add_subscription(TypeSubscription(topic_type="Default", agent_type=broadcastagenttype))
 
     agentruntime.start()
-    broadcastagentid = AgentId(broadcastagenttype , "broadcastagent")
-    await agentruntime.send_message(MessageModel(content="message from runtime"),broadcastagentid)
+    # broadcastagentid = AgentId(broadcastagenttype , "broadcastagent")
+    # await agentruntime.send_message(MessageModel(content="message from runtime"),broadcastagentid)
+
+    await agentruntime.publish_message(MessageModel("Message from runtime") , topic_id=TopicId(type="Default", source="default"))
     
     await agentruntime.stop_when_idle()
     await agentruntime.close()
