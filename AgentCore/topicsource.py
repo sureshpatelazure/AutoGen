@@ -39,8 +39,6 @@ async def main() -> None:
 
       # AgentId
       topicsourcename = "addbulkwordmerge"
-      coderagent_id = AgentId(coderagent_type, topicsourcename)
-      revieweragent_id = AgentId(revieweragent_type , topicsourcename)
 
       # Start Runtime
       agentruntime.start()
