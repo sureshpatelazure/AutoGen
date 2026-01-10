@@ -59,13 +59,13 @@ async def main() -> None:
       # Start Runtime
       agentruntime.start()
       
-      await agentruntime.publish_message(MessageModel("DEV Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
-      await agentruntime.publish_message(MessageModel("DEV Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
+      await agentruntime.publish_message(MessageModel("DEV_1 Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
+      await agentruntime.publish_message(MessageModel("DEV_2 Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
 
       print("-------------------------")
 
-      await agentruntime.publish_message(MessageModel("QA Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa))
-      await agentruntime.publish_message(MessageModel("QA Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa ))
+      await agentruntime.publish_message(MessageModel("QA_1 Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa))
+      await agentruntime.publish_message(MessageModel("QA_2 Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa ))
 
       await agentruntime.stop_when_idle()
       await agentruntime.close()
