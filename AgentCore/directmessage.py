@@ -33,14 +33,14 @@ async def main() -> None:
 
     agentruntime = SingleThreadedAgentRuntime()
     
-    inneragenttype =  "inneragent"
-    await ReceiverAgent.register(agentruntime, inneragenttype, lambda : ReceiverAgent("receiveragent    "))
+    receiveragnttype =  "ReceiverAgent"
+    await ReceiverAgent.register(agentruntime, receiveragnttype, lambda : ReceiverAgent("receiveragent    "))
 
-    outeragenttype = "outeragent"
-    await SenderAgent.register(agentruntime, outeragenttype, lambda : SenderAgent("SenderAgent", inneragenttype))
+    senderagenttype = "SenderAgent"
+    await SenderAgent.register(agentruntime, senderagenttype, lambda : SenderAgent("SenderAgent", receiveragnttype))
 
     agentruntime.start()
-    senderagentid = AgentId(outeragenttype , "outeragent")
+    senderagentid = AgentId(senderagenttype , "SenderAgent")
     await agentruntime.send_message(MessageModel(content="message from runtime"),senderagentid)
     
     await agentruntime.stop_when_idle()
