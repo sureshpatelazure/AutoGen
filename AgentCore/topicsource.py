@@ -53,13 +53,19 @@ async def main() -> None:
 
 
       # AgentId
-      topicsourcename = "addbulkwordmerge"
+      topicsourcename_dev = "addbulkwordmerge_dev"
+      topicsourcename_qa = "addbulkwordmerge_qa"
 
       # Start Runtime
       agentruntime.start()
       
-      await agentruntime.publish_message(MessageModel("Dev Message from Runtime"), TopicId(topicnamedev, topicsourcename ))
-      await agentruntime.publish_message(MessageModel("QA Message from Runtime"), TopicId(topicnameqa, topicsourcename ))
+      await agentruntime.publish_message(MessageModel("DEV Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
+      await agentruntime.publish_message(MessageModel("DEV Message from Runtime"), TopicId(topicnamedev, topicsourcename_dev ))
+
+      print("-------------------------")
+
+      await agentruntime.publish_message(MessageModel("QA Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa))
+      await agentruntime.publish_message(MessageModel("QA Message from Runtime"), TopicId(topicnameqa, topicsourcename_qa ))
 
       await agentruntime.stop_when_idle()
       await agentruntime.close()
